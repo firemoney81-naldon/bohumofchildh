@@ -1,23 +1,501 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+  <style>
+        /* CSS Reset and Global Styles */
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f8faff; /* Light blue background for a clean feel */
+            color: #333;
+            font-size: 16px;
+        }
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+        }
+        h1, h2, h3 {
+            color: #004e92; /* Deep blue for authority and trust */
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            line-height: 1.4;
+            color: #003366;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e0eaff;
+        }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 1.5rem; }
+        strong { font-weight: 700; color: #004e92; }
+
+        /* Navigation Bar */
+        header {
+            background-color: #004e92;
+            color: white;
+            padding: 1.5rem 1rem;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        /* Call to Action Buttons */
+        .cta-button {
+            display: block;
+            background-color: #ff6600; /* Orange accent color */
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 2rem auto;
+            transition: background-color 0.3s ease, transform 0.2s;
+            text-align: center;
+            max-width: 300px;
+        }
+        .cta-button:hover {
+            background-color: #e65c00;
+            transform: translateY(-2px);
+        }
+
+        /* Keyword Tags/Summary */
+        .keyword-summary {
+            background-color: #e0f0ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #004e92;
+        }
+        .keyword-summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .keyword-summary li {
+            background-color: #cce0ff;
+            color: #004e92;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Data Visualization: Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #eee;
+        }
+        th {
+            background-color: #f0f8ff; /* Light blue header */
+            color: #004e92;
+            font-weight: 700;
+        }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #eef7ff; }
+
+        /* Interactive Elements: Accordion FAQ */
+        .faq-accordion dt {
+            background-color: #f4f8fa;
+            padding: 1rem;
+            border-bottom: 1px solid #e0eaff;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            color: #003366;
+        }
+        .faq-accordion dt:hover {
+            background-color: #e0eaff;
+        }
+        .faq-accordion dd {
+            background-color: white;
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            margin: 0;
+            display: none;
+        }
+        .faq-accordion dt.active + dd {
+            display: block;
+        }
+
+        /* Forms (User engagement) */
+        .form-section {
+            background-color: #f0f8ff;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 1px solid #cce0ff;
+        }
+        .form-section label {
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-section input[type="text"],
+        .form-section input[type="number"],
+        .form-section select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-section button {
+            background-color: #004e92;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .form-section button:hover {
+            background-color: #003366;
+        }
+
+        /* External Links Styling */
+        .external-links {
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        .external-links ul {
+            list-style: square;
+            margin-left: 1rem;
+        }
+        .external-links li a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.7rem; }
+            h3 { font-size: 1.3rem; }
+            nav ul { flex-wrap: wrap; justify-content: space-around; gap: 1rem; }
+            .keyword-summary ul { justify-content: center; }
+            .form-section input[type="text"], .form-section select { width: 100%; }
+        }
+        @media (max-width: 480px) {
+            main { padding: 1rem; }
+            .cta-button { max-width: 100%; padding: 1rem; font-size: 0.9rem; }
+            nav a { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#intro">어린이보험이란?</a></li>
+                <li><a href="#advantages">35세 가입 장점</a></li>
+                <li><a href="#cost">가격 및 비교</a></li>
+                <li><a href="#selection">가입 전략</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">견적 요청</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <h1 id="intro">35세 어린이보험 가입 완벽 가이드: 2026년 최신 정보 및 추천 순위</h1>
+
+        <div class="keyword-summary">
+            <p style="font-size: 1.1rem; font-weight: 600;">✅ 핵심 키워드 요약:</p>
+            <ul>
+                <li>35세 어린이보험</li>
+                <li>어린이보험 추천</li>
+                <li>30대 어린이보험 가격</li>
+                <li>비갱신형 어린이보험</li>
+                <li>어린이보험 장점</li>
+                <li>성인보험 차이점</li>
+                <li>가입 순위</li>
+                <li>가입 팁</li>
+                <li>2026년 보험</li>
+            </ul>
+        </div>
+
+        <section id="introduction">
+            <h2>35세에 어린이보험을 가입해야 하는 이유: 성인보험과의 근본적인 차이점</h2>
+            <p><strong>35세 어린이보험</strong>은 30대 초반 성인들 사이에서 최근 가장 뜨거운 관심사 중 하나입니다. 일반적으로 어린이보험은 0세부터 30세까지 가입이 가능했지만, 2026년 현재 일부 보험사에서는 가입 연령을 만 35세까지 확대했습니다. 왜 30대 성인이 어린이보험에 주목해야 할까요? 핵심은 <strong>보장 범위의 넓이</strong>와 <strong>합리적인 가격</strong>에 있습니다.</p>
+            <p>35세 어린이보험은 성인보험 대비 <strong>비갱신형</strong>으로 가입 시 보험료가 저렴하며, 중대 질병 진단비(암, 뇌혈관질환, 허혈성심장질환 등) 보장 한도가 높다는 장점을 가집니다. 특히 30대 초반은 건강 상태가 비교적 양호하여 보험료 산정에서 유리한 위치를 차지합니다. 이 가이드에서는 35세 어린이보험 가입을 위한 필수 정보, 장점과 단점, 2026년 기준 <strong>어린이보험 가격</strong> 및 <strong>추천 순위</strong>를 상세히 다루어 보겠습니다.</p>
+
+            <h3>35세 어린이보험 가입이 유리한 주요 장점 (성인보험과 비교)</h3>
+            <p><strong>1. 넓은 보장 범위:</strong> 어린이보험은 성인보험과 달리 면책사항이 적고, 뇌혈관 질환이나 허혈성 심장 질환과 같은 중증 질병에 대한 보장 범위가 넓습니다. <strong>암 진단금</strong>의 경우, 유사암(갑상선암 등) 보장 한도 또한 성인보험보다 높게 책정되는 경우가 많습니다.</p>
+            <p><strong>2. 저렴한 보험료:</strong> 35세의 나이는 30대 중반이지만, 어린이보험 상품군에서는 마지막 가입 연령대에 속합니다. 성인보험 상품과 비교할 때, 동일한 보장 내용이라도 <strong>35세 어린이보험 비용</strong>이 상대적으로 저렴하게 책정되는 경향이 있습니다. 이는 어린이보험이 보험금 지급률이 낮은 연령대에 맞춰 설계되었기 때문입니다.</p>
+            <p><strong>3. 비갱신형 가입 가능:</strong> <strong>비갱신형 어린이보험</strong>은 한 번 가입한 보험료가 만기 시까지 변동되지 않습니다. 성인보험은 갱신형 상품이 많은데, 이는 나이가 들수록 보험료가 상승하여 노년기에 큰 부담이 될 수 있습니다. 35세에 비갱신형으로 가입하면 100세 만기 시까지 안정적인 보험료를 유지할 수 있습니다.</p>
+            <a href="#contact" class="cta-button" aria-label="35세 어린이보험 견적 문의하기">나에게 맞는 35세 어린이보험 견적 받기</a>
+        </section>
+
+        <section id="advantages">
+            <h2>30대 초반의 필수 체크리스트: 보장 내용 상세 분석</h2>
+            <p>35세 어린이보험을 가입할 때 단순히 '가격이 싸다'는 이유만으로 선택해서는 안 됩니다. <strong>30대 초반 보험</strong> 가입 시점에서는 중대 질병 진단비, 수술비, 입원일당 등 핵심 특약의 구성이 중요합니다. 다음은 35세 어린이보험에 포함해야 할 핵심 보장 내용입니다.</p>
+
+            <h3>1. 3대 핵심 진단비 (암, 뇌혈관, 심장 질환)</h3>
+            <p><strong>암 진단비:</strong> 30대에도 암 발병률이 증가하는 추세이므로, <strong>암 진단금</strong> 보장 금액을 충분히 확보해야 합니다. 특히 갑상선암, 기타 피부암 등을 포함하는 <strong>유사암 진단비</strong>가 일반암 진단비의 20% 이상으로 보장되는지 확인해야 합니다. 성인보험은 유사암 진단비가 일반암 진단비의 10% 미만인 경우가 많습니다.</p>
+            <p><strong>뇌혈관질환 진단비:</strong> 뇌졸중(뇌경색, 뇌출혈)뿐만 아니라 뇌혈관 질환 전체를 보장하는지 확인해야 합니다. <strong>35세 어린이보험</strong>은 대부분 뇌혈관 질환 진단비를 포함하여 넓은 범위의 보장을 제공합니다.</p>
+            <p><strong>허혈성 심장질환 진단비:</strong> 급성 심근경색뿐만 아니라 협심증 등 허혈성 심장 질환까지 보장하는지 확인하세요. 30대 초반부터 준비하면 향후 발생할 수 있는 심혈관계 질환에 대해 대비할 수 있습니다.</p>
+            <a href="#cost" class="cta-button">보장 내용별 가격 비교해보기</a>
+
+            <h3>2. 기타 주요 특약 및 가입 요령</h3>
+            <p><strong>질병후유장해:</strong> 3% 이상 후유장해 시 보장되는 특약으로, 질병으로 인해 발생하는 신체적 장애에 대해 평생 동안 보장을 받을 수 있습니다. <strong>35세 어린이보험</strong>을 통해 이 특약을 포함하면 든든한 노후 보장이 됩니다.</p>
+            <p><strong>입원일당 및 수술비:</strong> 질병이나 상해로 인한 입원 및 수술 시 보장받는 특약입니다. 특히 잦은 질병이나 작은 수술에도 보장이 가능하여 실비보험만으로는 부족한 부분을 채워줍니다.</p>
+            <p><strong>만기 설정:</strong> <strong>만기</strong>는 80세, 90세, 100세 만기 중 선택이 가능합니다. 평균 수명 증가 추세를 고려할 때, 100세 만기를 선택하여 노년기까지 보장을 받는 것이 유리합니다. 하지만 만기가 길어질수록 <strong>어린이보험 금액</strong>이 상승하므로 본인의 예산과 상황을 고려하여 결정해야 합니다.</p>
+        </section>
+
+        <section id="cost">
+            <h2>35세 어린이보험 가격 비교: 비갱신형 vs. 갱신형 vs. 성인보험</h2>
+            <p><strong>35세 어린이보험 가격</strong>은 가입자의 나이, 성별, 직업군, 선택한 보장 내용, 보험사의 손해율에 따라 달라집니다. 특히 <strong>비갱신형</strong>으로 가입하는 경우 초기 보험료는 갱신형보다 높지만, 장기적으로 총 납입 금액이 적다는 장점이 있습니다.</p>
+
+            <h3>1. 2026년 기준 35세 남녀 평균 보험료 비교 (예상 금액)</h3>
+            <p>아래 표는 2026년 기준 35세 남성과 여성이 <strong>비갱신형 어린이보험</strong>을 가입할 경우의 대략적인 월 보험료 <strong>예상 금액</strong>입니다. 이는 가입자의 건강 상태, 특약 구성에 따라 크게 변동될 수 있습니다. <strong>30대 초반 보험료</strong>는 비교적 저렴하지만, 가입 시기를 늦추면 늦출수록 보험료는 상승합니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>남성 (35세)</th>
+                        <th>여성 (35세)</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>월 납입 보험료 (예상)</strong></td>
+                        <td>5만원 ~ 7만원대</td>
+                        <td>4만원 ~ 6만원대</td>
+                        <td>비갱신형 100세 만기 기준</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3대 진단비 보장 (암, 뇌혈관, 심장)</strong></td>
+                        <td>각 3~5천만원 (회사별 상이)</td>
+                        <td>각 3~5천만원 (회사별 상이)</td>
+                        <td>특약 구성에 따라 변동</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가입 장점</strong></td>
+                        <td colspan="2">성인보험 대비 높은 보장 한도, 낮은 초기 보험료</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2. 35세 어린이보험 vs. 성인보험 vs. 30세 만기 전환형 어린이보험 비교</h3>
+            <p><strong>35세 어린이보험 가입</strong> 시 가장 큰 고민은 기존의 성인보험과 비교했을 때 어떤 상품이 더 유리한가 하는 것입니다. 또한 30세 만기 상품의 경우 30세 시점에 성인보험으로 전환하는 과정이 필요합니다. <strong>어린이보험 차이점</strong>을 정확히 알고 선택해야 합니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>35세 어린이보험 (비갱신형)</th>
+                        <th>성인 종합보험</th>
+                        <th>기존 30세 만기 어린이보험</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>주요 특징</strong></td>
+                        <td>낮은 보험료로 100세까지 보장, 넓은 보장 범위</td>
+                        <td>보장 범위가 좁고 보험료가 비쌈 (동일 보장 시)</td>
+                        <td>30세 시점에 성인보험으로 전환 필수 (보험료 상승)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가입 가능 연령</strong></td>
+                        <td>만 35세까지</td>
+                        <td>만 15세 ~ 60세</td>
+                        <td>만 30세까지</td>
+                    </tr>
+                    <tr>
+                        <td><strong>보험료 비교 (동일 보장 기준)</strong></td>
+                        <td>가장 저렴함</td>
+                        <td>비쌈</td>
+                        <td>전환 시점부터 보험료 상승</td>
+                    </tr>
+                    <tr>
+                        <td><strong>핵심 보장</strong></td>
+                        <td>3대 진단비, 질병후유장해 특약 유리</td>
+                        <td>갱신형 상품이 많음, 면책사항 많음</td>
+                        <td>만기 시점 보장 종료</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="text-align: right; font-size: 0.9rem;">* 위 비교 표는 일반적인 상품을 기준으로 작성되었으며, 자세한 내용은 상품별 약관을 확인해야 합니다.</p>
+        </section>
+
+        <section id="selection">
+            <h2>35세 어린이보험 추천 순위 및 가입 전략 (저렴한곳 찾는 법)</h2>
+            <p>어린이보험은 여러 회사에서 출시하고 있으며, <strong>35세 어린이보험 순위</strong>는 개인의 건강 상태와 원하는 보장 내용에 따라 달라집니다. 어떤 회사의 상품이 무조건 좋다고 단정하기 어렵습니다. <strong>저렴한곳</strong>을 찾기 위해서는 반드시 여러 보험사의 상품을 <strong>비교</strong>해봐야 합니다.</p>
+
+            <h3>1. 나에게 맞는 어린이보험 찾는 3가지 핵심 전략</h3>
+            <p><strong>전략 1: 비갱신형을 우선으로 선택하세요.</strong> 35세는 경제 활동을 활발하게 할 시기입니다. 갱신형보다는 초기 보험료가 다소 비싸더라도 <strong>비갱신형 어린이보험</strong>을 선택해야 향후 60대 이후의 보험료 상승 부담을 덜 수 있습니다. 총 납입액을 계산해 보면 비갱신형이 압도적으로 유리합니다.</p>
+            <p><strong>전략 2: 불필요한 특약은 제외하고 3대 진단비에 집중하세요.</strong> 보험료를 낮추는 가장 효과적인 방법은 가입자에게 중요도가 낮은 특약을 제외하는 것입니다. <strong>35세 어린이보험</strong>을 가입하는 목적은 중대한 질병에 대비하는 것입니다. 3대 진단비(암, 뇌혈관, 심장 질환)의 보장 금액을 높이고, 불필요한 자잘한 특약은 제외하여 <strong>어린이보험 싼곳</strong>을 찾는 것이 중요합니다.</p>
+            <p><strong>전략 3: 100세 만기를 기본으로 설정하세요.</strong> 평균 수명이 증가하면서 80세 만기는 보장이 끝나는 시점에 노년기의 질병 위험에 노출될 수 있습니다. <strong>35세 어린이보험 가입</strong> 시점부터 100세 만기로 설계하여 평생 보장을 확보하는 것이 장기적인 관점에서 유리합니다.</p>
+
+            <h3>2. 내돈내산 후기 기반, 어린이보험 선택 시 고려 사항</h3>
+            <p>실제 <strong>내돈내산 후기</strong>를 보면, 가입자들은 단순히 가격만으로 상품을 선택하지 않습니다. 가입 후 보험금 청구가 간편한지, 고객 서비스가 좋은지도 중요합니다. 또한, 보험금 지급률 및 지급 거부율 등 금융감독원 공시 자료를 참고하여 <strong>35세 어린이보험 추천</strong> 상품을 최종 결정해야 합니다. 2026년에는 보험사별 상품 구성이 더욱 다양해졌으므로, 전문가와의 상담이 필수적입니다.</p>
+        </section>
+
+        <section id="faq" class="faq-accordion">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. 35세에 가입하는 어린이보험은 성인이 되면 어떻게 되나요?</dt>
+                <dd>A1. 만 35세에 가입하는 어린이보험은 만기 시점(예: 100세 만기)까지 보장이 유지됩니다. 가입 시점의 상품명만 '어린이보험'일 뿐이며, 성인이 되어서도 해지할 필요 없이 가입 조건 그대로 보장을 받을 수 있습니다. <strong>비갱신형 어린이보험</strong>의 경우 보험료 변동 없이 쭉 유지됩니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q2. 어린이보험 가입 시 고지해야 하는 사항이 있나요?</dt>
+                <dd>A2. 네, 모든 보험 상품과 마찬가지로 <strong>35세 어린이보험</strong> 가입 시에도 최근 5년 이내 입원, 수술 여부 및 3개월 이내 병원 치료 여부 등을 고지해야 합니다. 만약 고지 의무를 위반할 경우 보험금 지급 거부 또는 계약 해지가 될 수 있습니다. 꼼꼼하게 확인하세요.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q3. 35세 어린이보험의 '장점'과 '단점'을 비교해 주세요.</dt>
+                <dd>A3. <strong>장점:</strong> 성인보험 대비 넓은 보장 범위, 특히 3대 진단비와 유사암 보장 한도가 높습니다. <strong>단점:</strong> 35세가 가입할 수 있는 상품이 한정적이며, 일부 특약은 가입 연령 제한으로 인해 선택하지 못할 수 있습니다. 하지만 전반적으로 30대에게 매우 유리한 선택지입니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q4. 이미 실비보험을 가지고 있는데, 어린이보험을 또 가입해야 하나요?</dt>
+                <dd>A4. 실비보험은 실제 발생한 치료비용을 보장하지만, 진단비는 보장하지 않습니다. <strong>35세 어린이보험</strong>은 암 진단금, 뇌혈관 질환 진단금 등 질병 진단 시 생활비 명목으로 큰 금액을 지급하여 실비보험만으로는 부족한 부분을 채워줍니다. 두 보험은 서로 보완하는 관계입니다.</dd>
+            </dl>
+        </section>
+
+        <section id="contact">
+            <h2>35세 어린이보험 가입, 전문가와 1:1 상담으로 시작하세요</h2>
+            <p><strong>35세 어린이보험 가입</strong>은 30대 초반에게 최고의 보험 재테크 방법 중 하나입니다. 하지만 복잡한 약관과 다양한 상품들 속에서 나에게 맞는 <strong>어린이보험 추천</strong> 상품을 찾기란 쉽지 않습니다. 저희는 고객님의 상황에 맞는 맞춤형 <strong>35세 어린이보험 비교</strong> 분석을 통해 최적의 상품을 제안해 드립니다.</p>
+            <p>지금 바로 문의하셔서 합리적인 <strong>어린이보험 가격</strong>과 든든한 보장을 확인하고, 노후까지 안심할 수 있는 미래를 준비하세요. <strong>내돈내산</strong>으로 후회 없는 선택을 도와드립니다.</p>
+
+            <div class="form-section">
+                <h3>1:1 맞춤형 어린이보험 견적 신청</h3>
+                <form action="#" method="post">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력해 주세요" required>
+
+                    <label for="phone">연락처:</label>
+                    <input type="text" id="phone" name="phone" placeholder="예: 010-1234-5678" required>
+
+                    <label for="age">나이:</label>
+                    <select id="age" name="age" required>
+                        <option value="">나이 선택</option>
+                        <option value="30">30세</option>
+                        <option value="31">31세</option>
+                        <option value="32">32세</option>
+                        <option value="33">33세</option>
+                        <option value="34">34세</option>
+                        <option value="35">35세</option>
+                    </select>
+
+                    <label for="coverage">원하는 핵심 보장:</label>
+                    <select id="coverage" name="coverage" required>
+                        <option value="">선택</option>
+                        <option value="cancer">암 진단비</option>
+                        <option value="brain-heart">뇌혈관/심장질환 진단비</option>
+                        <option value="all">종합 보장 (3대 진단비 + 수술비)</option>
+                    </select>
+
+                    <button type="submit">무료 견적 요청하기</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="external-links">
+            <h3>신뢰할 수 있는 외부 정보 출처</h3>
+            <ul>
+                <li> <a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a> - 보험 상품 공시 정보 확인</li>
+                <li> <a href="https://namu.wiki/w/%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%B3%B4%ED%97%98" target="_blank">나무위키: 어린이보험</a> - 어린이보험 개념 및 특징 정보</li>
+                <li> <a href="https://www.nhis.or.kr/" target="_blank">국민건강보험공단 (NHIS)</a> - 국내 건강보험 정책 및 통계</li>
+                <li> <a href="https://www.nso.go.kr/index.do" target="_blank">통계청</a> - 대한민국 인구 및 질병 관련 통계 자료</li>
+                <li> <a href="https://www.kidi.or.kr/" target="_blank">보험연구원 (KIDI)</a> - 보험 산업 동향 및 연구 자료</li>
+            </ul>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>&copy; 2026 35세 어린이보험 정보 제공 웹사이트. All rights reserved.</p>
+    </footer>
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "35세 어린이보험 가입 완벽 가이드",
+      "description": "35세 어린이보험 가입을 위한 모든 정보. 30대 초반에게 유리한 이유, 성인보험과의 차이점, 합리적인 가격으로 가입하는 방법과 추천 순위를 2026년 최신 기준으로 분석합니다.",
+      "url": "https://yourdomain.com/35yearold-childinsurance",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yourdomain.com/35yearold-childinsurance"
+      },
+      "lastReviewed": "2026-01-01",
+      "about": {
+        "@type": "Service",
+        "serviceType": "어린이보험 비교 및 가입 안내",
+        "provider": {
+          "@type": "Organization",
+          "name": "보험 비교 플랫폼",
+          "url": "https://yourdomain.com",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+82-10-1234-5678",
+            "contactType": "고객 서비스"
+          }
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "대한민국"
+        }
+      },
+      "keywords": "35세 어린이보험, 30대 어린이보험, 어린이보험 가격, 어린이보험 추천, 비갱신형 어린이보험, 35세 어린이보험 장점, 35세 어린이보험 단점, 35세 어린이보험 가입"
+    }
+    </script>
+
+    <script>
+        // FAQ accordion functionality (expand/collapse)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                // Close all other active items
+                document.querySelectorAll('dl dt.active').forEach((activeDt) => {
+                    activeDt.classList.remove('active');
+                    activeDt.setAttribute('aria-expanded', 'false');
+                });
+                // Open the clicked item if it wasn't active initially
+                if (!isActive) {
+                    dt.classList.add('active');
+                    dt.setAttribute('aria-expanded', 'true');
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+
+  
